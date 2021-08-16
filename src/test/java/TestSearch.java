@@ -1,10 +1,5 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import PageObjetcts.SearchPage;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class TestSearch extends BaseClass{
 
@@ -12,36 +7,20 @@ public class TestSearch extends BaseClass{
     public void Validate_Search(){
         String searchCriteria = "Macbook";
         int expectedResult = 3;
+        SearchPage searchPage = new SearchPage(driver);
 
-        WebElement searchInput = driver.findElement(By.name("search"));
-        searchInput.sendKeys(searchCriteria, Keys.ENTER);
-
-        Assert.assertTrue(driver.getCurrentUrl().contains("search=" + searchCriteria));
-        //List<WebElement> result = driver.findElements(By.cssSelector(".product-thumb"));
-
-        Assert.assertEquals(getResults() , expectedResult,
-                String.format("Expected %s results, but got %s", expectedResult, getResults() ));
+        searchPage.searchByTextOnSearchBar(searchCriteria);
+        searchPage.validateSearchURL(searchCriteria);
+        searchPage.validateResultsDisplayed(expectedResult);
     }
 
     @Test
     public void Validate_Empty_Results(){
-        String searchCriteria = "Start Wars";
+        String searchCriteria = "Star Wars";
         int expectedResult = 0;
 
-        WebElement searchInput = driver.findElement(By.name("search"));
-        searchInput.sendKeys(searchCriteria, Keys.ENTER);
-
-        //Assert.assertTrue(driver.getCurrentUrl().contains("search=" + searchCriteria));
-        //List<WebElement> result = driver.findElements(By.cssSelector(".product-thumb"));
-
-        Assert.assertEquals(getResults() , expectedResult,
-                String.format("Expected %s results, Actual %s results", expectedResult, getResults() ));
+        SearchPage searchPage = new SearchPage(driver);
+        searchPage.searchByTextOnSearchBar(searchCriteria);
+        searchPage.validateResultsDisplayed(expectedResult);
     }
-
-    public int getResults(){
-        return driver.findElements(By.cssSelector(".product-thumb")).size();
-    }
-
-
-
 }
