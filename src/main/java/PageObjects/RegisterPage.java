@@ -1,9 +1,9 @@
-package PageObjetcts;
+package PageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class RegisterPage {
+public class RegisterPage extends BaseClass{
     private WebDriver driver;
 
     public RegisterPage(WebDriver _driver) {
@@ -36,8 +36,7 @@ public class RegisterPage {
     }
 
     public void GoTo(){
-        HeaderPage headerPage = new HeaderPage(driver);
-        headerPage.clickOnMyAccount();
-        headerPage.clickOnRegisterButton();
+        headerPage().clickOnMyAccount();
+        headerPage().clickOnRegisterButton();
     }
 }

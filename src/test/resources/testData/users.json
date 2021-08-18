@@ -1,0 +1,14 @@
+{
+  "dataSet": [
+    {
+      "email" : "tattiana.alfarocastaneda@ucreativa.com",
+      "password" : "Testing2@",
+      "validAccount": true
+    },
+    {
+      "email" : "tattiana.alfarocastaneda@ucreativa.com",
+      "password" : "as235",
+      "validAccount": false
+    }
+  ]
+}

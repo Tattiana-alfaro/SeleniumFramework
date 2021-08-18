@@ -1,10 +1,9 @@
-package PageObjetcts;
+package PageObjects;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,8 +12,7 @@ import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
-public class BaseClass {
-    protected WebDriver driver;
+public class BaseClass extends PageObjectHandler{
 
     @BeforeTest
     public void beforeTest(){
