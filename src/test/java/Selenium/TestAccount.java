@@ -1,17 +1,15 @@
+package Selenium;
+
+import PageObjetcts.BaseClass;
 import PageObjetcts.HeaderPage;
 import PageObjetcts.LoginPage;
 import PageObjetcts.RegisterPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.util.concurrent.TimeUnit;
-
-public class TestAccount extends BaseClass{
+public class TestAccount extends BaseClass {
 
     @Description("Validate test loging was successful")
     @Test(description = "Test Login successful")

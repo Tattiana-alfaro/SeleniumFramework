@@ -5,13 +5,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class SearchPage {
+public class SearchResultsPage extends BaseClass{
 
     private WebDriver driver;
     private By searchBarLocator = By.name("search");
     private By resultsLocator = By.cssSelector(".product-thumb");
+    private By noProdMessageLocator = By.id("content");
+    private static final String ERROR_MESSAGE_NO_DISPLAYED = "There is no product that matches the search criteria.";
 
-    public SearchPage(WebDriver _driver) {
+
+    public SearchResultsPage(WebDriver _driver) {
         this.driver = _driver;
     }
 
@@ -23,11 +26,17 @@ public class SearchPage {
     }
 
     public void validateResultsDisplayed(int expectedResult){
-        Assert.assertEquals(getResults() , expectedResult,
-                String.format("Expected %s results, but got %s", expectedResult, getResults() ));
+        Assert.assertEquals(getResultsCount() , expectedResult,
+                String.format("Expected %s results, but got %s", expectedResult, getResultsCount() ));
     }
 
-    public int getResults(){
+    public void validateNoMatchSearchCriteria(){
+        String actualErrorMessage = driver.findElement(noProdMessageLocator).getAttribute("innerHTML");
+        Assert.assertTrue(actualErrorMessage.contains(ERROR_MESSAGE_NO_DISPLAYED));
+
+    }
+
+    public int getResultsCount(){
         return driver.findElements(resultsLocator).size();
     }
 
