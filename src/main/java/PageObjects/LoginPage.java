@@ -3,8 +3,8 @@ package PageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
-    private WebDriver driver;
+public class LoginPage extends BasePage{
+
 
     //Elements
     private By emailInputLocator = By.name("email");
@@ -12,7 +12,7 @@ public class LoginPage {
     private By submitButtonSelector = By.xpath("//input[@value='Login' and @type ='submit']");
 
     public LoginPage(WebDriver _driver) {
-        this.driver = _driver;
+        super(_driver);
     }
 
     public void EnterEmail(String email){

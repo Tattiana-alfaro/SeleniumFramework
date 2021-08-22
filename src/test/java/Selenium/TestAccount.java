@@ -1,6 +1,7 @@
 package Selenium;
 
 import PageObjects.BaseClass;
+import PageObjects.BasePage;
 import PageObjects.LoginPage;
 import dataProviders.UsersProvider;
 import io.qameta.allure.Description;
@@ -80,6 +81,19 @@ public class TestAccount extends BaseClass {
         registerPage().FillForm(firstName, lastName, email,telephone, password);
         Assert.assertEquals(registerPage().getConfirmationMessage(), expectedMessage);
     }
+
+    @Test
+    public void Test_Duplicated_Email(){
+
+    }
+    /**
+     * Open browser
+     * Navigate to ...
+     * Click to sign in page -> clickOnSignInPageButton()
+     * Fill the form  -> fillTheForm(username, password)
+     * Click submit -> clickOnSubmitButton()
+     * */
+
 
 
 }

@@ -1,5 +1,6 @@
 package PageObjects;
 
+import Selenium.PageObjectHandler;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -10,19 +11,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.*;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
-public class BaseClass extends PageObjectHandler{
-
-    @BeforeTest
-    public void beforeTest(){
-        //System.out.println("*BeforeTest");
-    }
-
+public class BaseClass extends PageObjectHandler {
     @Parameters({"browser"})
     @BeforeMethod
-    public void beforeMethod(@Optional("chrome") String browser){
-
+    public void beforeMethod(@Optional("chrome") String browser) throws MalformedURLException, InterruptedException {
         switch (browser){
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
@@ -32,35 +27,24 @@ public class BaseClass extends PageObjectHandler{
                 WebDriverManager.iedriver().setup();
                 driver = new InternetExplorerDriver();
                 break;
-
             default:
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
-
+                break;
         }
-
-        String URL = "https://demo.opencart.com/";
-
         driver.manage().window().maximize();
-        driver.get(URL);
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS); //
-        //driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);//Scripts en correr
-        //driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);//page Load
-    }
-    @AfterTest
-    public void AfterTest(){
-        //System.out.println("*AfterTest");
+        driver.get("https://demo.opencart.com/");
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void AfterMethod(){
-        //System.out.println("*AfterMethod");
         TakeScreenshot();
         driver.close();
         try {
             driver.quit();
-        }catch (WebDriverException exception){
-            System.out.println("Error quit browser:" + exception);
+        } catch (WebDriverException ex){
+            System.out.println("El browser ya estaba cerrado");
         }
     }
 

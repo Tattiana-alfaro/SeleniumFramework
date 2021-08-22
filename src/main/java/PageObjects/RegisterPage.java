@@ -3,11 +3,11 @@ package PageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class RegisterPage extends BaseClass{
-    private WebDriver driver;
+public class RegisterPage extends BasePage {
+
 
     public RegisterPage(WebDriver _driver) {
-        this.driver = _driver;
+        super(_driver);
     }
 
     private By nameLocator = By.name("firstName");
@@ -36,7 +36,8 @@ public class RegisterPage extends BaseClass{
     }
 
     public void GoTo(){
-        headerPage().clickOnMyAccount();
-        headerPage().clickOnRegisterButton();
+        HeaderPage headerPage = new HeaderPage(driver);
+        headerPage.clickOnMyAccount();
+        headerPage.clickOnRegisterButton();
     }
 }

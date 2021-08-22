@@ -5,9 +5,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class SearchResultsPage extends BaseClass{
+public class SearchResultsPage extends BasePage {
 
-    private WebDriver driver;
     private By searchBarLocator = By.name("search");
     private By resultsLocator = By.cssSelector(".product-thumb");
     private By noProdMessageLocator = By.id("content");
@@ -15,7 +14,7 @@ public class SearchResultsPage extends BaseClass{
 
 
     public SearchResultsPage(WebDriver _driver) {
-        this.driver = _driver;
+        super(_driver);
     }
 
     public void searchByTextOnSearchBar(String text){
