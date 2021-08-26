@@ -1,6 +1,6 @@
 package Selenium;
 
-import PageObjects.BaseClass;
+import PageObjects.*;
 import PageObjects.BasePage;
 import PageObjects.SearchResultsPage;
 import dataProviders.SearchProvider;

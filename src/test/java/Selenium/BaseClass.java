@@ -1,4 +1,4 @@
-package PageObjects;
+package Selenium;
 
 import Selenium.PageObjectHandler;
 import io.github.bonigarcia.wdm.WebDriverManager;

@@ -9,7 +9,8 @@ public class LoginPage extends BasePage{
     //Elements
     private By emailInputLocator = By.name("email");
     private By passwordInputLocator = By.name("password");
-    private By submitButtonSelector = By.xpath("//input[@value='Login' and @type ='submit']");
+    private By submitButtonSelector = By.xpath("//input[@value='Login' " +
+            "and @type ='submit']");
 
     public LoginPage(WebDriver _driver) {
         super(_driver);

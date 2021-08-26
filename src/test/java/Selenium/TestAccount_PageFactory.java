@@ -1,19 +1,20 @@
 package Selenium;
 
+import PageObjects.*;
 import PageObjects.LoginPage;
+import PageObjects.LoginPage_PageFactory;
 import dataProviders.UsersProvider;
 import io.qameta.allure.Description;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import pojo.UserAccount;
 
-public class TestAccount extends BaseClass {
+public class TestAccount_PageFactory extends BaseClass {
     public static final String ERROR_EMAIL_AND_PASSWORD_INVALID_MESSAGE = "warning: no match for e-mail address and/or password.";
-    public By logOutButtonLocator = By.linkText("Logout");
-    public By alertMessageLocator = By.xpath("//div[contains(@class, 'alert-danger')]");
 
-    @Description("Validate test login was successful")
+    @Description("Validate test loging was successful")
     @Test(description = "Test Login successful")
     public void  Test_Login_Successful(){
 
@@ -38,15 +39,17 @@ public class TestAccount extends BaseClass {
     @Description("Validate test login with data")
     @Test (dataProvider = "getUsersData", dataProviderClass = UsersProvider.class)
     public void Test_Login_With_Data(UserAccount testUser){
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage_PageFactory loginPage = new LoginPage_PageFactory(driver);
 
         loginPage.GoTo();
         loginPage.login(testUser.getEmail(), testUser.getPassword());
 
         if(testUser.isValidAccount())
-            Assert.assertTrue(driver.findElement(logOutButtonLocator).isDisplayed());
+            Assert.assertTrue(loginPage.isLogOutButtonDisplayed());
         else
-            Assert.assertEquals(ERROR_EMAIL_AND_PASSWORD_INVALID_MESSAGE.toLowerCase(), driver.findElement(alertMessageLocator).getText().toLowerCase().trim());
+            Assert.assertEquals(
+                    ERROR_EMAIL_AND_PASSWORD_INVALID_MESSAGE.toLowerCase(),
+                    loginPage.getTextInAlertMessage());
     }
 
     @Description("Testing Unsuccessful credentials")
