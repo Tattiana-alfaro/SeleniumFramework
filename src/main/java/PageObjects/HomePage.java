@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage extends BasePage {
 
+
     public HomePage(WebDriver _driver){
         super(_driver);
     }
@@ -25,4 +26,5 @@ public class HomePage extends BasePage {
         HeaderPage headerPage = new HeaderPage(driver);
         headerPage.clickOnYourStoreButton();
     }
+
 }

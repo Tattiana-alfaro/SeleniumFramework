@@ -14,6 +14,7 @@ public class PageObjectHandler {
     private ProductPage productPage;
     private ShoppingCartPage shoppingCartPage;
 
+
     public PageObjectHandler(){}
 
     public HeaderPage headerPage(){

@@ -1,6 +1,5 @@
 package Selenium;
 
-import Selenium.PageObjectHandler;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -15,6 +14,7 @@ import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 public class BaseClass extends PageObjectHandler {
+    public static String URL = "https://demo.opencart.com/";
     @Parameters({"browser"})
     @BeforeMethod
     public void beforeMethod(@Optional("chrome") String browser) throws MalformedURLException, InterruptedException {
@@ -33,9 +33,10 @@ public class BaseClass extends PageObjectHandler {
                 break;
         }
         driver.manage().window().maximize();
-        driver.get("https://demo.opencart.com/");
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+        driver.get(URL);
     }
+
 
     @AfterMethod(alwaysRun = true)
     public void AfterMethod(){

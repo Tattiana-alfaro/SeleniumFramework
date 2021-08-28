@@ -1,0 +1,22 @@
+{
+  "dataSet": [
+    {
+      "productName" : "iPhone",
+      "dollarPrice" : 123.20,
+      "euroPrice" : 106.04,
+      "poundSterlingPrice" : 92.93
+    },
+    {
+      "productName" : "MacBook Air",
+      "dollarPrice" : 1202.00,
+      "euroPrice" : 1034.60,
+      "poundSterlingPrice" : 906.69
+    },
+    {
+      "productName" : "Samsung SyncMaster 941BW",
+      "dollarPrice" : 242.00,
+      "euroPrice" : 208.30,
+      "poundSterlingPrice" : 182.55
+    }
+  ]
+}

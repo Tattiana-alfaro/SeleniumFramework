@@ -1,6 +1,9 @@
 package Selenium;
 
 import PageObjects.LoginPage;
+import PageObjects.RegisterPage;
+import PageObjects.Utils;
+import dataProviders.RegisterUserProvider;
 import dataProviders.UsersProvider;
 import io.qameta.allure.Description;
 import org.openqa.selenium.*;
@@ -36,7 +39,7 @@ public class TestAccount extends BaseClass {
 
     }
     @Description("Validate test login with data")
-    @Test (dataProvider = "getUsersData", dataProviderClass = UsersProvider.class)
+    @Test (dataProvider = "getUsersDataFromJson", dataProviderClass = UsersProvider.class)
     public void Test_Login_With_Data(UserAccount testUser){
         LoginPage loginPage = new LoginPage(driver);
 
@@ -65,24 +68,35 @@ public class TestAccount extends BaseClass {
         Assert.assertTrue(warningMessage.isDisplayed());
         Assert.assertEquals(expectedMessage.toLowerCase().trim(), warningMessage.getText().toLowerCase().trim());
     }
-    @Description("Validate create new account")
-    @Test(description = "Test create new account")
-    public void Test_Create_New_Account(){
-        String firstName = "testFirstName";
-        String lastName = "testLastName";
-        String email = "testAutomationFramewor@test.com";
-        String telephone = "2122340";
-        String password = "test1234@";
-        String expectedMessage = "Your Account Has Been Created!";
 
+    /**
+     * @param testUser
+     *
+     * Caso #1
+     * Verificar que el sitio web permite el registro a nuevos clientes.
+     * Ir al sitio web.
+     * Ir a la página de registro.
+     * Crear un usuario nuevo. (Utilizar un método aleatorio para generar el email)
+     * Verificar que el usuario está logueado.
+     */
+
+    @Description("Validate create new account")
+    @Test (dataProvider = "getRegisterUsersDataFromJson", dataProviderClass = RegisterUserProvider.class)
+    public void Test_Create_New_Account(UserAccount testUser){
+        String expectedMessage = "Your Account Has Been Created!";
         registerPage().GoTo();
-        registerPage().FillForm(firstName, lastName, email,telephone, password);
+        registerPage().FillForm(testUser.getFirstName(), testUser.getLastName(), Utils.getRandomEmail(), testUser.getTelephone(), testUser.getPassword());
         Assert.assertEquals(registerPage().getConfirmationMessage(), expectedMessage);
     }
 
-    @Test
-    public void Test_Duplicated_Email(){
-
+    @Description("Validate test login with data")
+    @Test (dataProvider = "getRegisterUsersDataFromJson", dataProviderClass = RegisterUserProvider.class)
+    public void Test_Duplicated_Email(UserAccount testUser){
+        String expectedErrorMessage = "Warning: E-Mail Address is already registered!";
+        RegisterPage registerPage = new RegisterPage(driver);
+        registerPage.GoTo();
+        registerPage.FillForm(testUser.getFirstName(), testUser.getLastName(), testUser.getEmail(), testUser.getTelephone(), testUser.getPassword());
+        Assert.assertEquals(registerPage.getEmailAlreadyRegistered(), expectedErrorMessage);
     }
     /**
      * Open browser

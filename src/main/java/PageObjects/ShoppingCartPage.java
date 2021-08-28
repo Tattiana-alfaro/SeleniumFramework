@@ -14,6 +14,7 @@ public class ShoppingCartPage extends BasePage {
     private By inputRowSelector = By.cssSelector("input");
     private By imageSelector = By.cssSelector("img");
     private By shoppingCartRows = By.xpath("//div[@id='content']//div[contains(@class, 'table-responsive')]//tr");
+    private By checkoutCartMessage = By.xpath("//div[@id='checkout-cart']/div");
 
     public ShoppingCartPage(WebDriver _driver){
         super(_driver);
@@ -43,5 +44,12 @@ public class ShoppingCartPage extends BasePage {
     }
     public int getAmountOfShoppingCartRows(){
         return driver.findElements(shoppingCartRows).size() - 1;
+    }
+
+    public boolean isCheckoutCartMessageDisplayed(){
+        return driver.findElement(checkoutCartMessage).isDisplayed();
+    }
+    public String getCheckoutCartMessageMessage(){
+        return driver.findElement(checkoutCartMessage).getText();
     }
 }

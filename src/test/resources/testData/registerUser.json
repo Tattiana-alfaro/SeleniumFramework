@@ -1,0 +1,11 @@
+{
+  "dataSet": [
+    {
+      "firstName" : "testFirstName",
+      "lastName" : "testLastName",
+      "email" : "testAutomationFramewor@test.com",
+      "telephone" : "2122340",
+      "password" : "test1234@"
+    }
+  ]
+}

@@ -12,7 +12,6 @@ public class SearchResultsPage extends BasePage {
     private By noProdMessageLocator = By.id("content");
     private static final String ERROR_MESSAGE_NO_DISPLAYED = "There is no product that matches the search criteria.";
 
-
     public SearchResultsPage(WebDriver _driver) {
         super(_driver);
     }
